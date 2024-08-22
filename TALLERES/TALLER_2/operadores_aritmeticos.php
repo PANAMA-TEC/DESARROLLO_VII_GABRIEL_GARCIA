@@ -1,3 +1,4 @@
+
 <?php
     $a = 10;
     $b = 3;
@@ -27,3 +28,4 @@
     echo "Pre-incremento (++c): " . ++$c . "<br>";
     echo "Valor final de c: $c<br>";
 ?>
+    
