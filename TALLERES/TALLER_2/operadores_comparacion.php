@@ -22,7 +22,7 @@
 
     echo "No idéntico (!==): ";
     var_dump($a !== $b);
-    echo "<br>";
+    echo "<br>";=
 
     echo "Menor que (<): ";
     var_dump($a < $c);
