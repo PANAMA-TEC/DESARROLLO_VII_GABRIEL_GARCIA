@@ -1,4 +1,3 @@
-
 <?php
     // Definición de variables
     $nombre = "María";
