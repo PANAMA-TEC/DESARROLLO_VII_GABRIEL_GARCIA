@@ -14,7 +14,7 @@
 <body>
     <header>
         <h1><?php echo $tituloPagina; ?></h1>
-        <?php echo generarMenu($paginaActual); ?>
+        
     </header>
     <main>
         
