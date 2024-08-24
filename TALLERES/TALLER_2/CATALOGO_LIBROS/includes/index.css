@@ -1,0 +1,12 @@
+.listadoLibros {
+    border-style: solid;
+    color: black;
+    display: flex;
+    gap:20px;
+    padding: 20px;
+}
+
+.libros 
+{
+
+}
