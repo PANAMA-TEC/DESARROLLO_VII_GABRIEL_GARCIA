@@ -1,12 +1,9 @@
 
 <?php
     // Ejemplo de uso de date()
-    echo "Fecha actual: " . date("Y-m-d") . "
-    ";
-    echo "Hora actual: " . date("H:i:s") . "
-    ";
-    echo "Fecha y hora actuales: " . date("Y-m-d H:i:s") . "
-    ";
+    echo "Fecha actual: " . date("Y-m-d") . "";
+    echo "Hora actual: " . date("H:i:s") . "";
+    echo "Fecha y hora actuales: " . date("Y-m-d H:i:s") . "";
 
     // Ejercicio: Usa date() para mostrar la fecha actual en el formato "Día de la semana, día de mes de año"
     // Por ejemplo: "Lunes, 15 de agosto de 2023"
