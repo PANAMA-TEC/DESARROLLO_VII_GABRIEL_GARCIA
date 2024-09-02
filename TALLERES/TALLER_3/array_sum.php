@@ -13,9 +13,9 @@
     // Ejercicio: Calcular el total de ventas
     $ventas = [
         "Lunes" => 100.50,
-        "Martes" => 200.75,
+        "Martes" => 20.75,
         "Miércoles" => 50.25,
-        "Jueves" => 300.00,
+        "Jueves" => 30.00,
         "Viernes" => 250.50
     ];
     $totalVentas = array_sum($ventas);
