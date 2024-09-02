@@ -34,7 +34,7 @@
     }
 
     $diasSemana = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"];
-    $diasBuscar = ["lunes", "sábado", "festivo"];
+    $diasBuscar = ["lunes", "sábado", "festivo", "jueves"];
 
     $resultadosDias = elementosEnArray($diasBuscar, $diasSemana);
     echo "</br>Resultados de búsqueda de días:</br>";
