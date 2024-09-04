@@ -15,6 +15,10 @@
     function aplicar_impuesto($subtotal) {
         return $subtotal * 0.07;
     }
+    
+    function calcular_total($subtotal, $descuento, $impuesto) {
+        return $subtotal - $descuento + $impuesto;
+    }
 
     
 ?>
