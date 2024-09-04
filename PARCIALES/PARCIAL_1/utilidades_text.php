@@ -14,7 +14,28 @@
         return count($array_out);
     }
 
-    echo contar_palabras(" hola mundo ")
+    function contar_vocales($texto) {
+        $texto = $texto;
+        $texto_out = "";
+       
+        strtolower($texto);
+        echo $texto;
 
+        for ($i=0; $i < strlen($texto); $i++) {  
+            if( $texto[$i] == "a" || $texto[$i] == "e" || $texto[$i] == "i" || $texto[$i] == "o" || $texto[$i] == "u"){
+                $texto_out .= $texto[$i];
+            }
+        }
+            
+        return strlen($texto_out);
+    }
+
+    
+
+    echo contar_vocales("holA mUndo__")
+
+
+
+    
 
 ?>
