@@ -29,6 +29,34 @@
         return strlen($texto_out);
     }
 
+    function invertir_palabras($texto){
+        $array = explode(" ", $texto);
+        $array_out = [];
+        $str_out = "";
+        
+
+        foreach($array as $item){
+            if($item != "" ) {
+                array_push($array_out, $item);
+            }
+        }
+
+        // array con palabras listo para contar.
+        // falta imprimirlo alrevez.
+
+        for ($i=count($array_out) - 1; $i >= 0; $i--) { 
+            $str_out .= $array_out[$i] . " ";
+            
+        }
+
+        return $str_out;
+
+       
+    }
+
+    echo invertir_palabras('hola mundo ');
+    
+
     
 
    
