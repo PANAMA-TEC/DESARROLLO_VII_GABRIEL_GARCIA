@@ -63,6 +63,7 @@ $total = calcular_total($subtotal, $descuento, $impuesto);
     }
 
 </style>
+
 <body>
     <h1>Resumen de Compra</h1>
     <div class="contenido_web">
@@ -88,8 +89,6 @@ $total = calcular_total($subtotal, $descuento, $impuesto);
             
         </table>
         
-        
-
         <div class='resumen_general'> 
             <p><strong>Subtotal:</strong> $<?php echo number_format($subtotal, 2); ?></p>
             <p><strong>Descuento aplicado:</strong> $<?php echo number_format($descuento, 2); ?></p>

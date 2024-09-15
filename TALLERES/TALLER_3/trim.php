@@ -15,6 +15,8 @@
     // Ejercicio: Limpia el siguiente texto eliminando espacios y guiones bajos al inicio y al final
     $textoParaLimpiar = "___   Mi nombre es Juan   ___";
     $textoLimpiado = trim($textoParaLimpiar, " _");
+    
+
     echo "</br>Texto original para limpiar: '$textoParaLimpiar'</br>";
     echo "Texto limpiado: '$textoLimpiado'</br>";
 
