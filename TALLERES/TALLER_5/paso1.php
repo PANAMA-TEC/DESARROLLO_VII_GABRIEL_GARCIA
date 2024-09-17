@@ -29,7 +29,7 @@
         foreach ($ordenado as $ciudad) {
             echo "- $ciudad\n";
         }
-        
+
     }
 
     // 8. Llamar a la función
@@ -38,5 +38,23 @@
     // TAREA: Crea una función que cuente y retorne el número de ciudades que comienzan con una letra específica
     // Ejemplo de uso: contarCiudadesPorInicial($ciudades, 'S') debería retornar 1 (Singapur)
     // Tu código aquí
+
+
+    function contarCiudadesPorInicial($iniciales, $myArray) {
+        $count = 0;
+        foreach ($myArray as $value) {
+            if (is_string($value)){
+                if( $value[0] == $iniciales ){
+                    $count += 1;
+                }
+            }
+
+            echo $value;
+        }
+        return $count;
+    }
+
+    $tarjet_caracter = "S";
+    echo "<br><br>Cantidad de ciudades con la letra [{$tarjet_caracter}] : " . contarCiudadesPorInicial($tarjet_caracter, $ciudades);
 
 ?>
