@@ -29,14 +29,14 @@ function promedioVentas($ventas) {
 }
 
 // 3. Calcular y mostrar el promedio de ventas por región y producto
-echo "Promedio de ventas por región y producto:\n";
+//echo "Promedio de ventas por región y producto:\n";
 foreach ($ventas as $region => $productos) {
-    echo "$region:\n";
+    //echo "$region:\n";
     foreach ($productos as $producto => $ventasProducto) {
         $promedio = promedioVentas($ventasProducto);
-        echo "  $producto: " . number_format($promedio, 2) . "\n";
+        //echo "  $producto: " . number_format($promedio, 2) . "\n";
     }
-    echo "\n";
+    //echo "\n";
 }
 
 // 4. Función para encontrar el producto más vendido en una región
@@ -54,10 +54,10 @@ function productoMasVendido($productos) {
 }
 
 // 5. Encontrar y mostrar el producto más vendido por región
-echo "Producto más vendido por región:\n";
+//echo "Producto más vendido por región:\n";
 foreach ($ventas as $region => $productos) {
     [$productoTop, $ventasTop] = productoMasVendido($productos);
-    echo "$region: $productoTop (Total: $ventasTop)\n";
+    //echo "$region: $productoTop (Total: $ventasTop)\n";
 }
 
 // 6. Calcular las ventas totales por producto
@@ -71,10 +71,10 @@ foreach ($ventas as $region => $productos) {
     }
 }
 
-echo "\nVentas totales por producto:\n";
+////echo "\nVentas totales por producto:\n";
 arsort($ventasTotalesPorProducto);
 foreach ($ventasTotalesPorProducto as $producto => $total) {
-    echo "$producto: $total\n";
+    //echo "$producto: $total\n";
 }
 
 // 7. Encontrar la región con mayores ventas totales
@@ -83,40 +83,17 @@ $ventasTotalesPorRegion = array_map(function($productos) {
 }, $ventas);
 
 $regionTopVentas = array_keys($ventasTotalesPorRegion, max($ventasTotalesPorRegion))[0];
-echo "\nRegión con mayores ventas totales: $regionTopVentas\n";
+////echo "\nRegión con mayores ventas totales: $regionTopVentas\n";
 
 // TAREA: Implementa una función que analice el crecimiento de ventas
 // Calcula y muestra el porcentaje de crecimiento de ventas del primer al último mes
 // para cada producto en cada región. Identifica el producto y la región con mayor crecimiento.
 // Tu código aquí
 
-$informe_crecimiento = [
-    "region_x" => [
-        "producto_x" => "%",
-        "producto_xn" => "%"
-    ],
-    "region_xn" => [
-        "producto_x" => "%",
-        "producto_xn" => "%"
-    ],
+////echo "<br><br> Pruebas personales: ";
 
-];
-
-/***
- * 
- * 2. Calcular el crecimiento de las ventas
- * Para esto se necesita ver el primer dia del mes y el ultimo con el objetivo de sacar un % de crecimiento.
- * 
- * 
- */
-
-// Obtener el ultimo valor del arreglo
-// echo end($datos_ventas['Region_1']['Producto_A']);
-// Obtener el primer valor del arreglo
-// echo  reset($datos_ventas['Region_1']['Producto_A']);
-echo "<br><br> Pruebas personales: ";
-
-function preparar_informe_crecimiento ($my_data) {
+// Funcion para calcular el % de crecimiento por mes para cada region y producto.
+function porcentaje_crecimiento($my_data) {
     $array_salida = [
 
     ];
@@ -124,6 +101,9 @@ function preparar_informe_crecimiento ($my_data) {
         foreach ($nombre_producto as $nombre_producto => $valores_registrados) {
             $sumatoria_ventas_x_producto = 0;
             $valor_anterior = 0;
+            
+            
+            
             foreach ($valores_registrados as $value) {
                 
                
@@ -148,9 +128,10 @@ function preparar_informe_crecimiento ($my_data) {
                     $my_value = 0;
                 }
     
-                array_push($array_salida[$nombre_region][$nombre_producto], [
+                
+                array_push($array_salida[$nombre_region][$nombre_producto], 
                    number_format($my_value,2)
-                ]);
+                );
     
                 $valor_anterior = $value;
                 
@@ -162,47 +143,102 @@ function preparar_informe_crecimiento ($my_data) {
 
 }
 
+function obtener_productos_maximos($datos) {
+    $resultado = array();
 
-function printSalesTable($data) {
-    echo '<table border="1">';
-    echo '<thead>';
-    echo '<tr>';
-    echo '<th>Región</th>';
-    echo '<th>Producto</th>';
-    echo '<th>Mes 1</th>';
-    echo '<th>Mes 2</th>';
-    echo '<th>Mes 3</th>';
-    echo '<th>Mes 4</th>';
-    echo '<th>Mes 5</th>';
-    echo '</tr>';
-    echo '</thead>';
-    echo '<tbody>';
+    foreach ($datos as $region => $productos) {
+        $porcentaje_maximo = -INF; // Inicializar con un valor muy bajo
+        $producto_mejor = '';
 
-    foreach ($data as $region => $products) {
-        foreach ($products as $product => $sales) {
-            echo '<tr>';
-            echo '<td>' . htmlspecialchars($region) . '</td>';
-            echo '<td>' . htmlspecialchars($product) . '</td>';
+        foreach ($productos as $producto => $porcentajes) {
+            $maximo_producto = max($porcentajes); // Encuentra el porcentaje máximo para este producto
             
-            foreach ($sales as $monthSales) {
-                foreach ($monthSales as $monthValue) {
-                    echo '<td>' . htmlspecialchars($monthValue) . '</td>';
-                }
+            if ($maximo_producto > $porcentaje_maximo) {
+                $porcentaje_maximo = $maximo_producto;
+                $producto_mejor = $producto;
             }
-            
-            echo '</tr>';
+        }
+
+        $resultado[$region] = $producto_mejor;
+    }
+
+    return $resultado;
+}
+
+// $productos_maximos = obtener_productos_maximos(porcentaje_crecimiento($ventas));
+// print_r($productos_maximos);
+
+function obtener_region_mayor_crecimiento($datos) {
+    $resultado = array();
+
+    foreach ($datos as $region => $productos) {
+        $crecimiento_total = 0;
+
+        foreach ($productos as $producto => $porcentajes) {
+            $crecimiento_total += max($porcentajes); // Suma del máximo porcentaje de cada producto
+        }
+
+        $resultado[$region] = $crecimiento_total;
+    }
+
+    // Encuentra la región con el mayor crecimiento
+    $region_mayor_crecimiento = array_search(max($resultado), $resultado);
+
+    return $region_mayor_crecimiento;
+}
+
+// Llamar a la función y mostrar la región con el mayor crecimiento
+// $region_maxima = obtener_region_mayor_crecimiento(porcentaje_crecimiento($ventas));
+// //echo "La región con el mayor crecimiento es: " . $region_maxima;
+
+function generar_tabla($datos) {
+    $html = '<table border="1">';
+    $html .= '<thead><tr><th>Región</th><th>Producto</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead>';
+    $html .= '<tbody>';
+   
+    print_r($datos);
+
+    foreach ($datos['porcentaje_ventas'] as $region => $productos) {
+        foreach ($productos as $producto => $porcentajes) {
+            $html .= '<tr>';
+            $html .= '<td>' . htmlspecialchars($region) . '</td>';
+            $html .= '<td>' . htmlspecialchars($producto) . '</td>';
+            foreach ($porcentajes as $porcentaje) {
+                $html .= '<td>' . htmlspecialchars($porcentaje) . '</td>';
+            }
+            $html .= '</tr>';
         }
     }
 
-    echo '</tbody>';
-    echo '</table>';
+    $html .= '</tbody></table>';
+    
+    // Agregar sección de productos con mayor crecimiento
+    $html .= '<h2>Productos con Mayor Crecimiento</h2>';
+    $html .= '<table border="1">';
+    $html .= '<thead><tr><th>Región</th><th>Producto</th></tr></thead>';
+    $html .= '<tbody>';
+    foreach ($datos['productos_mayor_crecimiento'] as $region => $producto) {
+        $html .= '<tr>';
+        $html .= '<td>' . htmlspecialchars($region) . '</td>';
+        $html .= '<td>' . htmlspecialchars($producto) . '</td>';
+        $html .= '</tr>';
+    }
+    $html .= '</tbody></table>';
+
+    // Agregar sección de región con mayor ventas
+    $html .= '<h2>Región con Mayor Ventas</h2>';
+    $html .= '<p>' . htmlspecialchars($datos['region_mayor_ventas']) . '</p>';
+
+    return $html;
 }
 
-printSalesTable(preparar_informe_crecimiento($ventas));
-//print_r($informe_crecimiento);
+$informe_final = [
+    'procentaje_ventas' => porcentaje_crecimiento($ventas),
+    'productos_mayor_crecimiento' => obtener_productos_maximos(porcentaje_crecimiento($ventas)),
+    'region_mayor_ventas' => obtener_region_mayor_crecimiento(porcentaje_crecimiento($ventas))
+];
 
-
-
+echo (json_encode($informe_final));
 
 ?>
       
