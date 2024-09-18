@@ -238,6 +238,7 @@ $informe_final = [
     'region_mayor_ventas' => obtener_region_mayor_crecimiento(porcentaje_crecimiento($ventas))
 ];
 
+
 echo (json_encode($informe_final));
 
 ?>
