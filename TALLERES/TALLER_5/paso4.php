@@ -37,7 +37,8 @@ $biblioteca = [
         "año" => 1813,
         "genero" => "Novela romántica",
         "prestado" => true
-    ]
+    ],
+    
 ];
 
 // 2. Función para imprimir la biblioteca
@@ -145,11 +146,53 @@ imprimirBiblioteca($resultadosBusqueda);
 // El reporte debe incluir: número total de libros, número de libros prestados,
 // número de libros por género, y el autor con más libros en la biblioteca
 function generarReporteBiblioteca($biblioteca) {
-    // Tu código aquí
+    // Número total de libros
+    $totalLibros = count($biblioteca);
+
+    // Número de libros prestados
+    $librosPrestados = [];
+
+    foreach ($biblioteca as $libro) {
+        if ($libro['prestado']) {
+            array_push($librosPrestados, $libro);
+        }
+    }
+
+    $totalPrestados = count($librosPrestados);
+
+    // Número de libros por género
+    $generos = array_column($biblioteca, 'genero');
+    // echo "<br><br> generos en la biblioteca: ";
+    // print_r($generos);
+    $conteoGeneros = array_count_values($generos);
+
+    // Autor con más libros en la biblioteca
+    $autores = array_column($biblioteca, 'autor');
+
+
+
+    $conteoAutores = array_count_values($autores);
+    arsort($conteoAutores); // Ordenar en orden descendente
+
+
+
+    $autorMasLibros = key($conteoAutores);
+
+    // Crear el reporte
+    $reporte = [
+        'total_libros' => $totalLibros, //ok
+        'total_prestados' => $totalPrestados, //ok
+        'libros_por_genero' => $conteoGeneros, //ok
+        'autor_con_mas_libros' => $autorMasLibros
+    ];
+
+    return $reporte;
 }
 
-// Ejemplo de uso de la función de reporte (descomenta para probar)
-// echo "Reporte de la Biblioteca:\n";
-// print_r(generarReporteBiblioteca($biblioteca));
+
+
+//Ejemplo de uso de la función de reporte (descomenta para probar)
+echo "<br><br>Reporte de la Biblioteca:\n";
+print_r(generarReporteBiblioteca($biblioteca));
 
 ?>
