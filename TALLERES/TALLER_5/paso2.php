@@ -56,4 +56,30 @@
     // (cantidad * precio). Muestra el resultado.
     // Tu código aquí
 
+    function productoMayorValor($productos) {
+        if (count($productos) === 0) {
+            return null; 
+        }
+        
+        $mayorValor = 0;
+        $indiceMayorValor = null;
+        $productoMayorValor = null;
+    
+        foreach ($productos as $indice => $value) {
+            $valorTotal = $value["cantidad"] * $value["precio"];
+    
+            if ($valorTotal > $mayorValor) {
+                $mayorValor = $valorTotal;
+                $indiceMayorValor = $indice;
+                $productoMayorValor = $value;
+            }
+        }
+    
+        return [$indiceMayorValor =>  $productoMayorValor];
+    }
+
+    echo("<br><br> Resultado:");
+    $resultado = productoMayorValor($inventario);
+    print_r($resultado);
+
 ?>
