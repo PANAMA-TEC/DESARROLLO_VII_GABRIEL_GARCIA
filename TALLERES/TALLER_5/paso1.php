@@ -42,6 +42,7 @@
 
     function contarCiudadesPorInicial($iniciales, $myArray) {
         $count = 0;
+        
         foreach ($myArray as $value) {
             if (is_string($value)){
                 if( $value[0] == $iniciales ){

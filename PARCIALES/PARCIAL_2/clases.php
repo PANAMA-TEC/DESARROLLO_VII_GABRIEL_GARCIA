@@ -1,140 +1,146 @@
 <?php
-// Archivo: clases.php
+    
+    abstract class Entrada implements Detalle{
+        
+        public $id;
+        public $fecha_creacion;
+        public $tipo;
+        public $titulo;
+        public $descripcion;
 
-class Tarea {
-    public $id;
-    public $titulo;
-    public $descripcion;
-    public $estado;
-    public $prioridad;
-    public $fechaCreacion;
-    public $tipo;
-    public $detallesEspecificos;
-
-
-    public function __construct($datos) {
-        foreach ($datos as $key => $value) {
-            $this->$key = $value;
+        public function __construct($datos = []) {
+            foreach ($datos as $key => $value) {
+                if (property_exists($this, $key)) {
+                    $this->$key = $value;
+                }
+            }
         }
     }
 
-    // Implementar estos getters
-    // public function getEstado() { }
-    // public function getPrioridad() { }
-}
+    class EntradaUnaColumnas extends Entrada {
+        public $titulo1;
+        public $descripcion;
 
-class GestorTareas {
-    private $tareas = [];
+        public function obtenerDetallesEspecificos(): string {
 
-    public function cargarTareas() {
-        
-        $json = file_get_contents('tareas.json');
-        $data = json_decode($json, true);
-        
-        print_r($data);
-        
-        foreach ($data as $tareaData) {
-            $tarea = new Tarea($tareaData);
-            $this->tareas[] = $tarea;
+            return "Entrada de una columna: " .$titulo;
+
         }
+    }
+
+    interface Detalle {
+
+        public function obtenerDetallesEspecificos(): string;
+
+    }
+
+    class GestorBlog {
+        private $entradas = [];
+
+        public function cargarEntradas() {
+            if (file_exists('blog.json')) {
+                $json = file_get_contents('blog.json');
+                $data = json_decode($json, true);
+                
+
+                foreach ($data as $entradaData) {
+
+                    switch ($entradaData['tipo']) {
+                        case 1;
+                            $this->entradas[] = new EntradaUnaColumnas($entradaData);
+                            break;
+                        case 2;
+                            $this->entradas[] = new EntradaDosColumnas($entradaData);
+                            break;
+                        case 3;
+                            $this->entradas[] = new EntradaTresColumnas($entradaData);
+                            break;
+                    } 
+
+                   
+                   
+                    #$this->entradas[] = new Entrada($entradaData);
+                    #$this->entradas[] = new EntradaUnaColumna($entradaData);
+                }
+            }
+        }
+    
+
+        public function guardarEntradas() {
+
+            $data = array_map( function($entrada) {
+
+                return get_object_vars($entrada);
+
+            }, $this->entradas );
+            
+            file_put_contents('blog.json', json_encode($data, JSON_PRETTY_PRINT));
         
-        return $this->tareas;
-    }
+        }
+
+        public function agregarEntrada(Entrada $entrada) {
+            return $this->entradas;
+        }
 
 
-    public function agregarTarea($tarea) {
+        public function editarEntradas(Entrada $entrada) {
+            return $this->entradas;
+        }
 
-    }
 
-    public function eliminarTarea($id) {
+        public function eliminarEntradas($id) {
        
-        $tareas = $this->tareas;
-   
-        foreach ($tareas as $key => $tarea) {
-            if ($tarea['id'] === $id) {
-                unset($tareas[$key]);
-                $this->tareas = array_values($tareas);
-             return  true;
-            }
+            $this->entradas = array_filter( $this->entradas, function($entrada) use ($id) {
+                return $entrada->id != $id; 
+            });
+
+            // echo "<pre>";
+            // print_r($this->entradas);
+            // echo "</pre>";
+
+            $this->entradas = array_values($this->entradas);
+
+            $this->guardarEntradas();
+            
+            return $this->entradas;
         }
-        return false;
-    }
 
-    public function actualizarEstadoTarea($id, $nuevoEstado)  {
-        $tareas = $this->tareas;
- 
-        foreach ($tareas as &$tarea) {
-            if ($tarea['id'] === $id) {
-                $tarea['estado'] = $nuevoEstado;
-                return true;
-            }
+        public function obtenerEntradas() {
+            return $this->entradas;
         }
-        return false;
-    }
 
-    // public function actualizarEstadoTarea($id, $nuevoEstado)  {
-
-    // }
-
-    public function buscarTareasPorEstado($estado)  {
-        $tareas = $this->tareas;
-        $tareasFiltradas = [];
-   
-        foreach ($tareas as $tarea) {
-            if ($tarea['estado'] === $estado) {
-                $tareasFiltradas[] = $tarea;
-            }
+        public function moverEntrada($id, $direccion) {
+            return $this->entradas;
         }
-   
-        return $tareasFiltradas;
     }
 
-    // public function listarTareas($filtroEstado = '')  {
-        
-    // }
+    class EntradaDosColumnas extends Entrada {
+        public $titulo1 = "";
+        public $descripcion1 = "";
+        public $titulo2 = "";
+        public $descripcion2 = "";
 
-    
+        public function obtenerDetallesEspecificos(): string {
 
-}
+            return "Entrada de dos columnas: " .$titulo1. " ".$titulo2;
 
-interface Detalle {
-    public function obtenerDetallesEspecificos();
-}
-
-class TareaDesarrollo extends Tarea implements Detalle{
-
-    private $lenguajeProgramacion = '';
-
-    public function obtenerDetallesEspecificos() {
-        return $this-> detallesEspecifico;
+        }
     }
 
+    class EntradaTresColumnas extends Entrada {
+        public $titulo1 = "";
+        public $descripcion1 = "";
+        public $titulo2 = "";
+        public $descripcion2 = "";
+        public $titulo3 = "";
+        public $descripcion3 = "";
 
+        public function obtenerDetallesEspecificos(): string {
 
-}
+            return "Entrada de tres columnas: " .$titulo1. " ".$titulo2." ".$titulo3 ;
 
-
-
-class TareaDiseno extends Tarea implements Detalle{
-
-    private $herramientaDiseno = '';
-
-    public function obtenerDetallesEspecificos() {
-        return $this-> detallesEspecifico;
+        }
     }
-    
-}
 
+?>
 
-class TareaTesting extends Tarea implements Detalle{
-    
-   private $tipoTest = '' ;
-
-  public function obtenerDetallesEspecificos() {
-     return $this-> detallesEspecifico;
-  }
-}
-// Implementar:
-// 1. La interfaz Detalle
-// 2. Modificar la clase Tarea para implementar la interfaz Detalle
-// 3. Las clases TareaDesarrollo, TareaDiseno y TareaTesting que hereden de Tarea
