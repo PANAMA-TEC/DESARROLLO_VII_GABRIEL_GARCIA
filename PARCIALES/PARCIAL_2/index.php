@@ -121,7 +121,7 @@ $entradas = $gestorBlog->obtenerEntradas();
                     <?php foreach ($entradas as $entrada): ?>
                         <tr>
                             <td><?php echo $entrada->id; ?></td>
-                            <td><?php echo $entrada->titulo ?? $entrada->titulo1; ?></td>
+                            <td><?php echo $entrada-> obtenerDetallesEspecificos(); ?></td>
                             <td><?php echo $entrada->tipo; ?> columna(s)</td>
                             <td><?php echo $entrada->fecha_creacion; ?></td>
                             <td>

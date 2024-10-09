@@ -18,12 +18,12 @@
     }
 
     class EntradaUnaColumnas extends Entrada {
-        public $titulo1;
+        public $titulo;
         public $descripcion;
 
         public function obtenerDetallesEspecificos(): string {
 
-            return "Entrada de una columna: " .$titulo;
+            return "Entrada de una columna: $this->titulo";
 
         }
     }
@@ -122,7 +122,7 @@
 
         public function obtenerDetallesEspecificos(): string {
 
-            return "Entrada de dos columnas: " .$titulo1. " ".$titulo2;
+            return "Entrada de dos columnas:  $this->titulo1 , $this->titulo2";
 
         }
     }
@@ -137,7 +137,7 @@
 
         public function obtenerDetallesEspecificos(): string {
 
-            return "Entrada de tres columnas: " .$titulo1. " ".$titulo2." ".$titulo3 ;
+            return "Entrada de tres columnas: $this->titulo1 , $this->titulo2 , $this->titulo3";
 
         }
     }
