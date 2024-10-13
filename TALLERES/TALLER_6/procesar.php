@@ -108,6 +108,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Procesar la foto de perfil
     if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] !== UPLOAD_ERR_NO_FILE) {
+        
+        if(file_exists('./uploads/'.$_FILES['foto_perfil']['name'])){
+
+            $_FILES['foto_perfil']['name'] =  cambiarNombreArchivo($_FILES['foto_perfil'], "FP_" . date('Ymd_His'));
+                    
+        }
+
+
         if (!validarFotoPerfil($_FILES['foto_perfil'])) {
             $errores[] = "La foto de perfil no es válida. comprueba el nombre del archivo, puede estar duplicado";
         } else {
