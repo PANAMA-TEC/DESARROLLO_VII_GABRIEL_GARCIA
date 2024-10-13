@@ -53,17 +53,5 @@
         }
     }
 
-    // Ejemplo de uso
-    $storage = new JsonStorage('./data.json');
 
-    // Agregar campos
-    $storage->addField('nombre', 'Juan');
-    $storage->addField('edad', 30);
-
-    // Actualizar un campo
-    $storage->updateField('edad', 31);
-
-
-    // Mostrar todos los campos
-    print_r($storage->getAllFields());
 ?>

@@ -46,10 +46,6 @@
             return false;
         }
 
-        if(file_exists('./uploads/'.$archivo['name'])){
-           return false;
-         
-        }
 
         return true;
     }
