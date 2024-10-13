@@ -7,8 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $datos = [];
 
     // Procesar y validar cada campo
-    $campos = ['nombre', 'email', 'edad', 'sitio_web', 'genero', 'intereses', 'comentarios'];
+    $campos = ['nombre', 'email', 'edad', 'sitio_web', 'born_date', 'genero', 'intereses', 'comentarios'];
+    
     foreach ($campos as $campo) {
+        
         if (isset($_POST[$campo])) {
             $valor = $_POST[$campo];
             $valorSanitizado = call_user_func("sanitizar" . ucfirst($campo), $valor);
@@ -23,9 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Procesar la foto de perfil
     if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] !== UPLOAD_ERR_NO_FILE) {
         if (!validarFotoPerfil($_FILES['foto_perfil'])) {
-            $errores[] = "La foto de perfil no es válida.";
+            $errores[] = "La foto de perfil no es válida. comprueba el nombre del archivo, puede estar duplicado";
         } else {
-            $rutaDestino = 'uploads/' . basename($_FILES['foto_perfil']['name']);
+            $rutaDestino = './uploads/' . basename($_FILES['foto_perfil']['name']);
             if (move_uploaded_file($_FILES['foto_perfil']['tmp_name'], $rutaDestino)) {
                 $datos['foto_perfil'] = $rutaDestino;
             } else {
