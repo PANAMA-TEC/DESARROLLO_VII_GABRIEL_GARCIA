@@ -30,6 +30,7 @@
     }
 
     function validarFotoPerfil($archivo) {
+        
         $tiposPermitidos = ['image/jpeg', 'image/png', 'image/gif'];
         $tamanoMaximo = 2 * 1024 * 1024; // 1MB
 

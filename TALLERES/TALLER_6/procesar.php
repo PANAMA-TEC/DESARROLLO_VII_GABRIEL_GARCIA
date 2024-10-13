@@ -1,6 +1,7 @@
 <?php
 require_once 'validaciones.php';
 require_once 'sanitizacion.php';
+require_once 'otrasFunciones.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errores = [];
@@ -14,7 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST[$campo])) {
             $valor = $_POST[$campo];
             $valorSanitizado = call_user_func("sanitizar" . ucfirst($campo), $valor);
-            $datos[$campo] = $valorSanitizado;
+
+            if ($campo == 'born_date'){
+                echo "campo encontrado";
+                $datos[$campo] = $valorSanitizado;
+                $datos['edad'] = $valorSanitizado = call_user_func("sanitizar" . ucfirst('edad'), calcularEdad($datos[$campo]) );
+            }else{
+
+                $datos[$campo] = $valorSanitizado;
+            }
 
             if (!call_user_func("validar" . ucfirst($campo), $valorSanitizado)) {
                 $errores[] = "El campo $campo no es válido.";
