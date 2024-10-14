@@ -1,3 +1,12 @@
+<?php
+    require_once "procesar.php";
+
+    $jsonST_FRONT = new JsonStorage('./data.json');
+    $myData = $jsonST_FRONT->getAllFields();
+    print_r( $myData['data'][array_key_last($myData['data'])]);
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="es">
