@@ -36,11 +36,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p style='color: red;'>$error</p>";
     }
     ?>
+    <?php
+        include 'config_sesion.php';
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+                die("Error de validación CSRF");
+            }
+            // ... resto del código de login ...
+        }
+
+        // Generar token CSRF
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    ?>
+
+    <!-- En el formulario HTML -->
     <form method="post" action="">
+     <!-- ... otros campos ... -->
+    
         <label for="usuario">Usuario:</label><br>
         <input type="text" id="usuario" name="usuario" required><br><br>
         <label for="contrasena">Contraseña:</label><br>
         <input type="password" id="contrasena" name="contrasena" required><br><br>
+        <input type="submit" value="Iniciar Sesión">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <input type="submit" value="Iniciar Sesión">
     </form>
 </body>
