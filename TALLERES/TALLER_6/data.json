@@ -131,6 +131,18 @@
                 "deportes"
             ],
             "comentarios": "sassad"
+        },
+        {
+            "nombre": "gabriel_Ga",
+            "email": "gagarcia@panama-tec.com",
+            "sitio_web": "http:\/\/www.panama-tec.com",
+            "born_date": "2023-01-13",
+            "edad": "1",
+            "genero": "masculino",
+            "intereses": [
+                "deportes"
+            ],
+            "comentarios": "sassad"
         }
     ]
 }
