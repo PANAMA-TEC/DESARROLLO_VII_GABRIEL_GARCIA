@@ -1,3 +1,6 @@
 [submodule "PROYECTO"]
 	path = PROYECTO
 	url = https://github.com/Jpineda03/Jpineda03-DESARROLLO_VII_JAVETT_PINEDA.git
+[submodule "PARCIAL_2"]
+	path = PARCIAL_2
+	url = https://github.com/PANAMA-TEC/PARCIAL_2.git
