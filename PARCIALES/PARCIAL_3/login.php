@@ -13,6 +13,10 @@
         return !empty($nombre) && strlen($nombre) <= 50;
     }
 
+    function validarPassword ( $password ){
+        return strlen($password) > 5 ;
+    }
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (isset($_POST['usuario']) && isset($_POST['contrasena'])) {
@@ -49,7 +53,7 @@
             header("Location: estudiante.php");
     
         }
-        
+
         if($_SESSION['rol'] == "Profesor"){
             header("Location: profesor.php");
     
