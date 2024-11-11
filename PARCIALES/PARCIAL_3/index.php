@@ -15,13 +15,13 @@
 
     <form method="post" action="./login.php">
      
-            <label for="usuario">Usuario:</label><br>
-           <input type="text" id="usuario" name="usuario" required><br><br>
+          <label for="usuario">Usuario:</label><br>
+          <input type="text" id="usuario" name="usuario" required><br><br>
 
-           <label for="contrasena">Contraseña:</label><br>
-           <input type="password" id="contrasena" name="contrasena" required><br><br>
+          <label for="contrasena">Contraseña:</label><br>
+          <input type="password" id="contrasena" name="contrasena" required><br><br>
 
-           <input type="submit" value="Iniciar Sesión">
+          <input type="submit" value="Iniciar Sesión">
            
 
            

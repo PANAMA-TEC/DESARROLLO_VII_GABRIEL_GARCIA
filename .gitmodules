@@ -4,3 +4,9 @@
 [submodule "PARCIAL_2"]
 	path = PARCIAL_2
 	url = https://github.com/PANAMA-TEC/PARCIAL_2.git
+[submodule "PARCIALES/PARCIAL_4_/assets/libraries/google-api-php-client"]
+	path = PARCIALES/PARCIAL_4_/assets/libraries/google-api-php-client
+	url = https://github.com/googleapis/google-api-php-client.git
+[submodule "PARCIALES/PARCIAL_4"]
+	path = PARCIALES/PARCIAL_4
+	url = https://github.com/PANAMA-TEC/PARCIAL_4.git
