@@ -1,3 +1,6 @@
 [submodule "PARCIALES/PARCIAL_4"]
 	path = PARCIALES/PARCIAL_4
 	url = https://github.com/PANAMA-TEC/PARCIAL_4.git
+[submodule "PROYECTO"]
+	path = PROYECTO
+	url = https://github.com/Jpineda03/PINEDA_GARCIA_DESARROLLO_VII_PROYECTO.git
